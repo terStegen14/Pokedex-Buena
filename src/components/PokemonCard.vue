@@ -95,8 +95,7 @@
   }
   .left-button{
     position: absolute;
-    top: 15%;
-    transform: translateY(-50%);
+    top: -21%;
     background: none;
     border: none;
     font-size: 1.5rem;

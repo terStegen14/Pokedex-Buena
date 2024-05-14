@@ -1,14 +1,14 @@
 <template>
     <div class="container">
         <img src="../assets/logo.png" alt="Pokemon logo" style="width: 50rem;">
-      <h1>1st GEN Pokédex</h1>
+      <h1>Kanto&Johto Pokédex</h1>
       <PokemonFilter @filterType="filterType" @filterRange="filterRange"/>
       <div class="container pokemon-list">
         <PokemonCard v-for="pokemon in filteredPokemon" :key="pokemon.id" :pokemon="pokemon" :isFavorite="isFavorite(pokemon)" :isTeam="isPokemonInTeam(pokemon)" @toggleFavorite="toggleFavorite" @toggleTeam="toggleTeam"
         />
       </div>
-      <PokemonTeam :team="team"/>
-      <PokemonFavorites :favorites="favorites"/>
+      <PokemonTeam :team="team" @toggleFavorite="toggleFavorite" @toggleTeam="toggleTeam"/>
+      <PokemonFavorites :favorites="favorites" @toggleFavorite="toggleFavorite" @toggleTeam="toggleTeam"/>
       <Inventory :inventory="inventory" @buyItem="buyItem"/>
       <Store @addToInventory="addToInventory"/>
     </div>
@@ -42,7 +42,7 @@
           elixir: 0,
         },
         filterType: null,
-        filterRange: [1, 151],
+        filterRange: [1, 251],
       };
     },
     computed: {
@@ -56,7 +56,7 @@
     },
     methods: {
       async fetchPokemon() {
-        const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
+        const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=251');
         const data = await response.json();
         this.pokemonList = await Promise.all(data.results.map(async (pokemon, index) => {
           const res = await fetch(pokemon.url);
