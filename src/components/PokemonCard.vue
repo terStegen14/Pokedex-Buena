@@ -46,6 +46,7 @@
           dragon: '#7038F8',
           steel: '#B8B8D0',
           fairy: '#EE99AC',
+          dark: '#2D383A',
         },
       };
     },
