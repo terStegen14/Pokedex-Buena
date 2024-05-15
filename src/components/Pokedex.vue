@@ -1,16 +1,13 @@
 <template>
   <div class="container">
-    <img src="../assets/logo.png" alt="Pokemon logo" style="width: 50rem;">
-    <h1>Kanto&Johto Pokédex</h1>
+    
     <PokemonFilter :allTypes="allPokemonTypes" @filterType="handleFilterType" @filterRange="filterRange"/>
     <div class="container pokemon-list">
-      <PokemonCard v-for="pokemon in filteredPokemon" :key="pokemon.id" :pokemon="pokemon" :isFavorite="isFavorite(pokemon)" :isTeam="isPokemonInTeam(pokemon)" @toggleFavorite="toggleFavorite" @toggleTeam="toggleTeam"
-      />
+      <PokemonCard v-for="pokemon in filteredPokemon" :key="pokemon.id" :pokemon="pokemon" :isFavorite="isFavorite(pokemon)" :isTeam="isPokemonInTeam(pokemon)" @toggleFavorite="toggleFavorite" @toggleTeam="toggleTeam"/>
     </div>
     <PokemonTeam :team="team" @toggleFavorite="toggleFavorite" @toggleTeam="toggleTeam"/>
     <PokemonFavorites :favorites="favorites" @toggleFavorite="toggleFavorite" @toggleTeam="toggleTeam"/>
-    <Inventory :inventory="inventory" @buyItem="buyItem"/>
-    <Store @addToInventory="addToInventory"/>
+    
   </div>
 </template>
 
@@ -19,8 +16,6 @@ import PokemonCard from './PokemonCard.vue';
 import PokemonFilter from './PokemonFilter.vue';
 import PokemonTeam from './PokemonTeam.vue';
 import PokemonFavorites from './PokemonFavorites.vue';
-import Inventory from './Inventory.vue';
-import Store from './Store.vue';
 
 export default {
   components: {
@@ -28,19 +23,12 @@ export default {
     PokemonFilter,
     PokemonTeam,
     PokemonFavorites,
-    Inventory,
-    Store,
   },
   data() {
     return {
       pokemonList: [],
       team: [],
       favorites: [],
-      inventory: {
-        pokeball: 0,
-        potion: 0,
-        elixir: 0,
-      },
       filterType: '',
       filterRange: [1, 251],
     };
@@ -88,12 +76,6 @@ export default {
     },
     filterRange(range) {
       this.filterRange = range;
-    },
-    addToInventory(item) {
-      this.inventory[item.name] += item.quantity;
-    },
-    buyItem(item) {
-      this.inventory[item.name] -= item.quantity;
     },
   },
   computed: {
