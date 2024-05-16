@@ -24,7 +24,7 @@
     <div id="app" class="container" style="margin-top: 60px;" >
       <img src="./assets/logo.png" alt="Pokemon logo" style="width: 50rem;">
       <h1 style="color: #ededed;">Kanto&Johto Pokédex</h1>
-      <component :is="currentView"></component>
+      <component :is="currentView" :inventory="inventoryData"></component>
     </div>
   </div>
 </template>
