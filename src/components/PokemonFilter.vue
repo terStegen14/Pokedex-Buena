@@ -31,7 +31,7 @@ export default {
       try {
         const response = await fetch('https://pokeapi.co/api/v2/type');
         const data = await response.json();
-        this.allPokemonTypes = data.results.map(type => type.name).filter(type => type !== 'fairy' && type !== 'stellar' && type !== 'unknown');
+        this.allPokemonTypes = data.results.map(type => type.name).filter(type => type !== 'stellar' && type !== 'unknown');
       } catch (error) {
         console.error('Error fetching Pokemon types:', error);
       }
