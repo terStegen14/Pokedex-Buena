@@ -9,7 +9,7 @@
           <p class="card-text">Price: {{ item.price }} coins</p>
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-secondary" @click="decrementQuantity(item)">-</button>
-            <button type="button" class="btn btn-secondary">{{ getItemQuantity(item) }}</button>
+            <button type="button" class="btn btn-secondary">{{ item.quantity }}</button>
             <button type="button" class="btn btn-secondary" @click="incrementQuantity(item)">+</button>
           </div>
         </div>
@@ -20,39 +20,41 @@
 
 <script>
 export default {
-  props: ['inventory'],
   data() {
     return {
       storeItems: [
-        { name: 'poke-ball', displayName: 'Pokéball', icon: '', price: 50 },
-        { name: 'great-ball', displayName: 'Great Ball', icon: '', price: 100 },
-        { name: 'ultra-ball', displayName: 'Ultra Ball', icon: '', price: 200 },
-        { name: 'potion', displayName: 'Potion', icon: '', price: 50 },
-        { name: 'elixir', displayName: 'Elixir', icon: '', price: 100 },
+        { name: 'poke-ball', displayName: 'Pokéball', icon: '', price: 50, quantity: 0 },
+        { name: 'great-ball', displayName: 'Great Ball', icon: '', price: 100, quantity: 0 },
+        { name: 'ultra-ball', displayName: 'Ultra Ball', icon: '', price: 200, quantity: 0 },
+        { name: 'potion', displayName: 'Potion', icon: '', price: 50, quantity: 0 },
+        { name: 'elixir', displayName: 'Elixir', icon: '', price: 100, quantity: 0 },
       ],
     };
   },
-  computed: {
-    itemQuantities() {
-      const quantities = {};
-      for (const item of this.inventory) {
-        quantities[item.name] = item.quantity;
-      }
-      return quantities;
-    }
+  async mounted() {
+    await this.fetchItemData();
   },
   methods: {
-    incrementQuantity(item) {
-      this.$emit('updateQuantity', { name: item.name, quantity: this.itemQuantities[item.name] + 1 });
-    },
-    decrementQuantity(item) {
-      if (this.itemQuantities[item.name] > 0) {
-        this.$emit('updateQuantity', { name: item.name, quantity: this.itemQuantities[item.name] - 1 });
+    async fetchItemData() {
+      for (const item of this.storeItems) {
+        try {
+          const response = await fetch(`https://pokeapi.co/api/v2/item/${item.name}`);
+          const data = await response.json();
+          item.displayName = data.names.find(name => name.language.name === 'en').name;
+          item.icon = data.sprites.default;
+        } catch (error) {
+          console.error('Error fetching item data:', error);
+        }
       }
     },
-    getItemQuantity(item) {
-      return this.itemQuantities[item.name] || 0;
-    }
+    incrementQuantity(item) {
+      item.quantity++;
+    },
+    decrementQuantity(item) {
+      if (item.quantity > 0) {
+        item.quantity--;
+      }
+    },
   },
 };
 </script>

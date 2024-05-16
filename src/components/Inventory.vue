@@ -15,15 +15,34 @@
 
 <script>
 export default {
-  props: ['inventory'],
-  computed: {
-    inventoryItems() {
-      return this.inventory.map(item => ({
-        ...item,
-        icon: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${item.name}.png`
-      }));
-    }
-  }
+  data() {
+    return {
+      inventoryItems: [
+        { name: 'poke-ball', displayName: 'Pokéball', icon: '', quantity: 0 },
+        { name: 'great-ball', displayName: 'Great Ball', icon: '', quantity: 0 },
+        { name: 'ultra-ball', displayName: 'Ultra Ball', icon: '', quantity: 0 },
+        { name: 'potion', displayName: 'Potion', icon: '', quantity: 0 },
+        { name: 'elixir', displayName: 'Elixir', icon: '', quantity: 0 },
+      ],
+    };
+  },
+  async mounted() {
+    await this.fetchItemData();
+  },
+  methods: {
+    async fetchItemData() {
+      for (const item of this.inventoryItems) {
+        try {
+          const response = await fetch(`https://pokeapi.co/api/v2/item/${item.name}`);
+          const data = await response.json();
+          item.displayName = data.names.find(name => name.language.name === 'en').name;
+          item.icon = data.sprites.default;
+        } catch (error) {
+          console.error('Error fetching item data:', error);
+        }
+      }
+    },
+  },
 };
 </script>
 
