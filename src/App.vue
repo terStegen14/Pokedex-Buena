@@ -5,17 +5,17 @@
         <div class="collapse navbar-collapse d-flex justify-content-around" id="navbarSupportedContent">
           <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
-              <button id="navBtn" class="nav-link btn" @click="currentView = 'Pokedex'"><img src="./assets/pokemon.png" alt="" style="width: 2.5rem;">Pokédex</button>
+              <button id="navBtn" class="nav-link btn" @click="currentView = 'AllFavTeam'"><img src="./assets/pokemon.png" alt="Pokéx nav button" style="width: 2.5rem; margin-top: -8px;  margin-right: 5px;">Pokédex</button>
             </li>
           </ul>
           <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
-              <button id="navBtn" class="nav-link btn" @click="currentView = 'Inventory'">Inventory</button>
+              <button id="navBtn" class="nav-link btn" @click="currentView = 'Inventory'"><img src="./assets/pokebag.png" alt="Pokéx nav button" style="width: 2.5rem; margin-top: -8px;  margin-right: 5px;">Inventory</button>
             </li>
           </ul>
           <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
-              <button id="navBtn" class="nav-link btn" @click="currentView = 'Store'">Store</button>
+              <button id="navBtn" class="nav-link btn" @click="currentView = 'Store'"><img src="./assets/pokeshop.png" alt="Pokéx nav button" style="width: 2.5rem; margin-top: -8px; margin-right: 5px;">Store</button>
             </li>
           </ul>
         </div>
@@ -30,20 +30,20 @@
 </template>
 
 <script>
-import Pokedex from './components/Pokedex.vue';
+import AllFavTeam from './components/AllFavTeam.vue';
 import Inventory from './components/Inventory.vue';
 import Store from './components/Store.vue';
 
 export default {
   name: 'App',
   components: {
-    Pokedex,
+    AllFavTeam,
     Inventory,
     Store,
   },
   data() {
     return {
-      currentView: 'Pokedex', // Pokedex is the default view
+      currentView: 'AllFavTeam',
     };
   },
 };

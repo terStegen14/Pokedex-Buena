@@ -1,6 +1,5 @@
 <template>
-  <div class="container">
-    
+  <div class="container">    
     <PokemonFilter :allTypes="allPokemonTypes" @filterType="handleFilterType" @filterRange="filterRange"/>
     <div class="container pokemon-list">
       <PokemonCard v-for="pokemon in filteredPokemon" :key="pokemon.id" :pokemon="pokemon" :isFavorite="isFavorite(pokemon)" :isTeam="isPokemonInTeam(pokemon)" @toggleFavorite="toggleFavorite" @toggleTeam="toggleTeam"/>
