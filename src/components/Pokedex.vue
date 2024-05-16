@@ -8,7 +8,7 @@
     </div>
 
     <div class="container pokemon-list" v-if="currentView === 'all'">
-      <PokemonFilter :allTypes="allPokemonTypes" @filterType="handleFilterType" @filterRange="filterRange"/>
+      <PokemonFilter :allTypes="allPokemonTypes" @filterType="handleFilterType" @filterRange="handleFilterRange"/>
       <PokemonCard 
         v-for="pokemon in filteredPokemon" 
         :key="pokemon.id" 
@@ -101,20 +101,19 @@ export default {
       }
     },
     handleFilterType(type) {
-      console.log('Tipo seleccionado en Pokedex:', type);
       this.filterType = type;
     },
-    filterRange(range) {
+    handleFilterRange(range) {
       this.filterRange = range;
     },
   },
   computed: {
     filteredPokemon() {
-      if (!this.filterType) {
-        return this.pokemonList;
-      } else {
-        return this.pokemonList.filter(pokemon => pokemon.types.includes(this.filterType));
-      }
+      return this.pokemonList.filter(pokemon => {
+        const inType = !this.filterType || pokemon.types.includes(this.filterType);
+        const inRange = pokemon.id >= this.filterRange[0] && pokemon.id <= this.filterRange[1];
+        return inType && inRange;
+      });
     }
   },
   mounted() {

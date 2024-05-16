@@ -1,6 +1,6 @@
 <template>
-  <div class="slider-container">
-    <p>Range: {{ min }} - {{ max }}</p>
+  <div class="container mb-4 slider-container">
+    <p style="text-align: center; color: #ededed; font-size: 1rem; margin-bottom: 0;">Range: {{ min }} - {{ max }}</p>
     <div class="sliders">
       <input type="range" :min="1" :max="251" v-model="min" @input="handleMinInput">
       <input type="range" :min="1" :max="251" v-model="max" @input="handleMaxInput"> 
@@ -43,12 +43,12 @@ export default {
 </script>
 
 <style scoped>
-.slider-container{
+.slider-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.sliders{
+.sliders {
   display: flex;
   flex-direction: column;
   max-width: 10rem;
