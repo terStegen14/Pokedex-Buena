@@ -5,7 +5,7 @@
         <div class="collapse navbar-collapse d-flex justify-content-around" id="navbarSupportedContent">
           <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
-              <button id="navBtn" class="nav-link btn" @click="currentView = 'AllFavTeam'"><img src="./assets/pokemon.png" alt="Pokéx nav button" style="width: 2.5rem; margin-top: -8px;  margin-right: 5px;">Pokédex</button>
+              <button id="navBtn" class="nav-link btn" @click="currentView = 'Pokedex'"><img src="./assets/pokemon.png" alt="Pokéx nav button" style="width: 2.5rem; margin-top: -8px;  margin-right: 5px;">Pokédex</button>
             </li>
           </ul>
           <ul class="navbar-nav mb-2 mb-lg-0">
@@ -21,29 +21,29 @@
         </div>
       </div>
     </nav>
-    <div id="app" style="margin-top: 60px;">
+    <div id="app" class="container" style="margin-top: 60px;" >
       <img src="./assets/logo.png" alt="Pokemon logo" style="width: 50rem;">
-      <h1>Kanto&Johto Pokédex</h1>
+      <h1 style="color: #ededed;">Kanto&Johto Pokédex</h1>
       <component :is="currentView"></component>
     </div>
   </div>
 </template>
 
 <script>
-import AllFavTeam from './components/AllFavTeam.vue';
+import Pokedex from './components/Pokedex.vue';
 import Inventory from './components/Inventory.vue';
 import Store from './components/Store.vue';
 
 export default {
   name: 'App',
   components: {
-    AllFavTeam,
+    Pokedex,
     Inventory,
     Store,
   },
   data() {
     return {
-      currentView: 'AllFavTeam',
+      currentView: 'Pokedex',
     };
   },
 };

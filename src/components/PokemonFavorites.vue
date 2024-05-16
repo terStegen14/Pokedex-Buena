@@ -1,7 +1,10 @@
 <template>
     <div class="container">
-      <h2>Favorites</h2>
-      <div v-if="favorites.length === 0">No Pokémon marked as favorite.</div>
+      <h2 style="text-align: center; color: #ededed; font-size: 3rem;">Favorites</h2>
+      <div v-if="favorites.length === 0">
+        <h5 style="text-align: center; color: #ededed; font-size: 1.5rem;">You don't have favorite Pokémons</h5>
+        <img src="../assets/pikasad.jpg" alt="">
+      </div>
       <div v-else class="favorites-container">
         <PokemonCard v-for="pokemon in favorites" :key="pokemon.id" :pokemon="pokemon" :isFavorite="true" :isTeam="isPokemonInTeam(pokemon)" 
              @toggleFavorite="$emit('toggleFavorite', pokemon)" 

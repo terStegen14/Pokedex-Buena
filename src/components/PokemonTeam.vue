@@ -1,7 +1,10 @@
 <template>
     <div class="container">
-      <h2>El Meu Equip</h2>
-      <div v-if="team.length === 0">Cap Pokémon seleccionat per l'equip.</div>
+      <h2 style="text-align: center; color: #ededed; font-size: 3rem;">Pokémon Team</h2>
+      <div v-if="team.length === 0">
+        <h5 style="text-align: center; color: #ededed; font-size: 1.5rem;">You don't have any Pokémon in your team</h5>
+        <img src="../assets/pikasad.jpg" alt="">
+      </div>
       <div v-else class="team-container">
         <PokemonCard v-for="pokemon in team" :key="pokemon.id" :pokemon="pokemon" :isTeam="true" :isFavorite="isFavorite(pokemon)" 
              @toggleFavorite="$emit('toggleFavorite', pokemon)" 

@@ -1,12 +1,42 @@
 <template>
   <div class="container">    
-    <PokemonFilter :allTypes="allPokemonTypes" @filterType="handleFilterType" @filterRange="filterRange"/>
-    <div class="container pokemon-list">
-      <PokemonCard v-for="pokemon in filteredPokemon" :key="pokemon.id" :pokemon="pokemon" :isFavorite="isFavorite(pokemon)" :isTeam="isPokemonInTeam(pokemon)" @toggleFavorite="toggleFavorite" @toggleTeam="toggleTeam"/>
-    </div>
-    <PokemonTeam :team="team" @toggleFavorite="toggleFavorite" @toggleTeam="toggleTeam"/>
-    <PokemonFavorites :favorites="favorites" @toggleFavorite="toggleFavorite" @toggleTeam="toggleTeam"/>
     
+    <div class="buttons mb-2">
+      <button class="btn" @click="currentView = 'all'">All</button>
+      <button class="btn" @click="currentView = 'favorites'">Favorites</button>
+      <button class="btn" @click="currentView = 'team'">Team</button>
+    </div>
+
+    <div class="container pokemon-list" v-if="currentView === 'all'">
+      <PokemonFilter :allTypes="allPokemonTypes" @filterType="handleFilterType" @filterRange="filterRange"/>
+      <PokemonCard 
+        v-for="pokemon in filteredPokemon" 
+        :key="pokemon.id" 
+        :pokemon="pokemon" 
+        :isFavorite="isFavorite(pokemon)" 
+        :isTeam="isPokemonInTeam(pokemon)" 
+        @toggleFavorite="toggleFavorite" 
+        @toggleTeam="toggleTeam"
+      />
+    </div>
+    
+    <div v-if="currentView === 'favorites'">
+      <PokemonFavorites 
+        :favorites="favorites" 
+        :team="team" 
+        @toggleFavorite="toggleFavorite" 
+        @toggleTeam="toggleTeam"
+      />
+    </div>
+    
+    <div v-if="currentView === 'team'">
+      <PokemonTeam 
+        :team="team" 
+        :favorites="favorites"
+        @toggleFavorite="toggleFavorite" 
+        @toggleTeam="toggleTeam"
+      />
+    </div>
   </div>
 </template>
 
@@ -30,6 +60,7 @@ export default {
       favorites: [],
       filterType: '',
       filterRange: [1, 251],
+      currentView: 'all',
     };
   },
   methods: {
@@ -96,5 +127,9 @@ export default {
 .pokemon-list{
   display: flex;
   flex-wrap: wrap;
+}
+.btn{
+  color: #ededed;
+  font-size: 1.5rem;
 }
 </style>
