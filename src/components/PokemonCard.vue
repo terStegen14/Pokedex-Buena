@@ -72,7 +72,12 @@
     text-align: center;
     text-transform: capitalize;
     background-color: #ededed;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s;
   }
+  .pokemon-card:hover {
+  transform: scale(1.05);
+}
   .image-container {
     position: relative;
   }

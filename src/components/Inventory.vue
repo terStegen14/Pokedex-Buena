@@ -1,9 +1,9 @@
 <template>
-  <div class="inventory">
-    <h2>Inventory</h2>
+  <div class="container">
+    <h2 class="text-center mb-4" style="color: #ededed;">Inventory</h2>
     <div class="card-deck">
       <div class="card" v-for="item in inventoryItems" :key="item.name">
-        <img :src="item.icon" :alt="item.displayName" class="card-img-top">
+        <img :src="item.icon" :alt="item.displayName">
         <div class="card-body">
           <h5 class="card-title">{{ item.displayName }}</h5>
           <p class="card-text">Quantity: {{ item.quantity }}</p>
@@ -24,11 +24,11 @@ export default {
   data() {
     return {
       inventoryItems: [
-        { name: 'poke-ball', displayName: 'Pokéball', icon: '', quantity: 0 },
-        { name: 'great-ball', displayName: 'Great Ball', icon: '', quantity: 0 },
-        { name: 'ultra-ball', displayName: 'Ultra Ball', icon: '', quantity: 0 },
-        { name: 'potion', displayName: 'Potion', icon: '', quantity: 0 },
-        { name: 'elixir', displayName: 'Elixir', icon: '', quantity: 0 },
+        { name: 'poke-ball', displayName: 'Pokéball', icon: '', quantity: 0, price: 200, maxQuantity: 15 },
+        { name: 'great-ball', displayName: 'Great Ball', icon: '', quantity: 0, price: 600, maxQuantity: 15 },
+        { name: 'ultra-ball', displayName: 'Ultra Ball', icon: '', quantity: 0, price: 1200, maxQuantity: 15 },
+        { name: 'potion', displayName: 'Potion', icon: '', quantity: 0, price: 300, maxQuantity: 5 },
+        { name: 'elixir', displayName: 'Elixir', icon: '', quantity: 0, price: 800, maxQuantity: 5 },
       ],
     };
   },
@@ -59,15 +59,27 @@ export default {
 </script>
 
 <style scoped>
-.inventory {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .card-deck {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
+}
+.card {
+  background: #ededed;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  border: 5px solid #2c6bb4;
+  transition: transform 0.2s;
+}
+.card:hover {
+  transform: scale(1.05);
+}
+.card-body {
+  text-align: center;
+}
+.card-title {
+  font-size: 18px;
+  color: #2c6bb4;
 }
 </style>

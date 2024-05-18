@@ -1,15 +1,16 @@
 <template>
-  <div class="store">
-    <h2>Store</h2>
+  <div class="container mt-5">
+    <h2 class="text-center mb-4" style="color: #ededed;">Store</h2>
     <div class="card-deck">
       <div class="card" v-for="item in storeItems" :key="item.name">
-        <img :src="item.icon" :alt="item.displayName" class="card-img-top">
+        <img :src="item.icon" :alt="item.displayName">
         <div class="card-body">
           <h5 class="card-title">{{ item.displayName }}</h5>
+          <p class="card-text">Price: {{ item.price }} PokéCoins</p>
           <div class="quantity-selector">
-            <button @click="updateQuantity(item, -1)">-</button>
+            <button class="btn btn-primary btn-sm" @click="updateQuantity(item, -1)">-</button>
             <span>{{ item.quantity }}</span>
-            <button @click="updateQuantity(item, 1)">+</button>
+            <button class="btn btn-primary btn-sm" @click="updateQuantity(item, 1)">+</button>
           </div>
         </div>
       </div>
@@ -27,13 +28,14 @@ export default {
   },
   data() {
     return {
-      storeItems: JSON.parse(JSON.stringify(this.items)) // Copia profunda para evitar mutaciones directas
+      storeItems: JSON.parse(JSON.stringify(this.items))
     };
   },
   methods: {
     updateQuantity(item, amount) {
       const newQuantity = item.quantity + amount;
-      if (newQuantity >= 0) {
+      const maxQuantity = item.maxQuantity;
+      if (newQuantity >= 0 && newQuantity <= maxQuantity) {
         this.$emit('update-item-quantity', item.name, newQuantity);
       }
     }
@@ -50,26 +52,35 @@ export default {
 </script>
 
 <style scoped>
-.store {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .card-deck {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
 }
-.quantity-selector {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.card {
+  background: #ededed;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;  
+  border: 5px solid #2c6bb4;
 }
-.quantity-selector button {
-  width: 30px;
-  height: 30px;
-  font-size: 20px;
+.card:hover {
+  transform: scale(1.05);
+}
+.card-body {
+  text-align: center;
+}
+.card-title {
+  font-size: 18px;
+  color: #2c6bb4;
+}
+.card-text {
+  color: #555;
+}
+.quantity-selector span {
+  display: inline-block;
+  width: 40px;
   text-align: center;
 }
 </style>
