@@ -10,14 +10,14 @@
           </ul>
           <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
-              <button id="navBtn" class="nav-link btn" @click="currentView = 'Inventory'"><img src="./assets/pokebag.png" alt="Pokéx nav button" style="width: 2.5rem; margin-top: -8px;  margin-right: 5px;">Inventory</button>
+              <button id="navBtn" class="nav-link btn" @click="currentView = 'Inventory'"><img src="./assets/pokebag.png" alt="Pokéx nav button" style="width: 2.5rem; margin-top: -8px;  margin-right: 5px;">Inventory&Store</button>
             </li>
           </ul>
-          <ul class="navbar-nav mb-2 mb-lg-0">
+          <!-- <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
               <button id="navBtn" class="nav-link btn" @click="currentView = 'Store'"><img src="./assets/pokeshop.png" alt="Pokéx nav button" style="width: 2.5rem; margin-top: -8px; margin-right: 5px;">Store</button>
             </li>
-          </ul>
+          </ul> -->
         </div>
       </div>
     </nav>
@@ -32,14 +32,14 @@
 <script>
 import Pokedex from './components/Pokedex.vue';
 import Inventory from './components/Inventory.vue';
-import Store from './components/Store.vue';
+// import Store from './components/Store.vue';
 
 export default {
   name: 'App',
   components: {
     Pokedex,
     Inventory,
-    Store,
+    // Store,
   },
   data() {
     return {

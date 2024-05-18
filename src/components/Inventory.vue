@@ -10,11 +10,17 @@
         </div>
       </div>
     </div>
+    <Store :items="inventoryItems" @update-item-quantity="updateItemQuantity" />
   </div>
 </template>
 
 <script>
+import Store from './Store.vue';
+
 export default {
+  components: {
+    Store
+  },
   data() {
     return {
       inventoryItems: [
@@ -42,7 +48,13 @@ export default {
         }
       }
     },
-  },
+    updateItemQuantity(name, quantity) {
+      const item = this.inventoryItems.find(item => item.name === name);
+      if (item) {
+        item.quantity = quantity;
+      }
+    }
+  }
 };
 </script>
 
