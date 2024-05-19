@@ -78,12 +78,14 @@ export default {
         };
       }));
     },
+    // verifica si el pokemon es favorit p al equip amb la id
     isFavorite(pokemon) {
       return this.favorites.some(fav => fav.id === pokemon.id);
     },
     isPokemonInTeam(pokemon) {
       return this.team.some(member => member.id === pokemon.id);
     },
+    // afegeix el pokemon si no hi es a la llista
     toggleFavorite(pokemon) {
       const index = this.favorites.findIndex(p => p.id === pokemon.id);
       if (index === -1) {

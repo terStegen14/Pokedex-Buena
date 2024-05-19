@@ -32,6 +32,7 @@ export default {
     };
   },
   methods: {
+    // actualitza la quantitat del objecte
     updateQuantity(item, amount) {
       const newQuantity = item.quantity + amount;
       const maxQuantity = item.maxQuantity;
@@ -40,6 +41,7 @@ export default {
       }
     }
   },
+  // observa quan hi han canvis per actualitzar correctament les dades
   watch: {
     items: {
       handler(newItems) {

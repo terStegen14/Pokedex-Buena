@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div class="item">
       <span>{{ name }}: {{ quantity }}</span>
     </div>
@@ -17,5 +17,5 @@
   .item {
     margin: 5px 0;
   }
-  </style>
+  </style> -->
   

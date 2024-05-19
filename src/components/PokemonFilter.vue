@@ -27,6 +27,7 @@ export default {
     };
   },
   methods: {
+    // retorna tots els tipius de pokemon per afergir-los al select
     async fetchPokemonTypes() {
       try {
         const response = await fetch('https://pokeapi.co/api/v2/type');
@@ -38,7 +39,7 @@ export default {
     },
     filterType(event) {
       const selectedType = event.target.value;
-      console.log('Tipo seleccionado en filtro:', selectedType);
+      // console.log('Tipo seleccionado en filtro:', selectedType);
       this.$emit('filterType', selectedType);
     },
     filterRange(range) {

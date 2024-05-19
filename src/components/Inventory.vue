@@ -10,6 +10,7 @@
         </div>
       </div>
     </div>
+    <!-- Botiga -->
     <Store :items="inventoryItems" @update-item-quantity="updateItemQuantity" />
   </div>
 </template>
@@ -23,6 +24,7 @@ export default {
   },
   data() {
     return {
+      // objectes predefinits
       inventoryItems: [
         { name: 'poke-ball', displayName: 'Pokéball', icon: '', quantity: 0, price: 200, maxQuantity: 15 },
         { name: 'great-ball', displayName: 'Great Ball', icon: '', quantity: 0, price: 600, maxQuantity: 15 },
@@ -33,14 +35,17 @@ export default {
     };
   },
   async mounted() {
+    // carregar inventari
     await this.fetchItemData();
   },
   methods: {
+    // peticion a la api dels objectes predefinits
     async fetchItemData() {
       for (const item of this.inventoryItems) {
         try {
           const response = await fetch(`https://pokeapi.co/api/v2/item/${item.name}`);
           const data = await response.json();
+          // per a que surti bé el nom
           item.displayName = data.names.find(name => name.language.name === 'en').name;
           item.icon = data.sprites.default;
         } catch (error) {
